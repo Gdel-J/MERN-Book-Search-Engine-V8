@@ -6,12 +6,12 @@ import { removeBookId } from '../utils/localStorage';
 // needed to refractor GraphQL API
 import { useQuery, useMutation } from '@apollo/client';
 import { REMOVE_BOOK } from '../utils/mutations';
-import { QUERY_ME_ME } from '../utils/queries';
+import { GET_ME } from '../utils/queries';
 
 
 //updated
 const SavedBooks = () => {
-  const { loading, data } = useQuery(QUERY_ME);
+  const { loading, data } = useQuery(GET_ME);
   const [ removeBook, { error}] = useMutation(REMOVE_BOOK);
 
   const userData = data?.me || {};
