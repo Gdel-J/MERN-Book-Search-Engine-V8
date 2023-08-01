@@ -10,15 +10,19 @@ import { GET_ME } from "../utils/queries";
 
 //updated
 const SavedBooks = () => {
+  //get user's data
   const { loading, data } = useQuery(GET_ME);
+  //setup mutation
   const [removeBook, { error }] = useMutation(REMOVE_BOOK);
 
   const userData = data?.me || {};
 
   // function to delete book from database
   const handleDeleteBook = async (bookId) => {
+    //check for token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
+    // if no token
     if (!token) {
       return false;
     }
@@ -26,6 +30,7 @@ const SavedBooks = () => {
     // Code updated
 
     try {
+      //try to remove book
       const { data } = await removeBook({
         variables: {
           bookId,
@@ -39,15 +44,16 @@ const SavedBooks = () => {
       console.error(err);
     }
   };
+
   //if we are still waiting for data
   //Show:
-
   if (loading) {
     return <h2>LOADING...</h2>;
   }
 
+  //return with user's saved books
   return (
-    <div>
+    <>
       <div fluid className="text-light bg-dark p-5">
         <Container>
           <h1>Viewing saved books!</h1>
@@ -55,7 +61,7 @@ const SavedBooks = () => {
       </div>
       <Container>
         <h2 className="pt-5">
-          {userData.savedBooks.length
+          {userData.savedBooks?.length
             ? `Viewing ${userData.savedBooks.length} saved ${
                 userData.savedBooks.length === 1 ? "book" : "books"
               }:`
@@ -63,9 +69,9 @@ const SavedBooks = () => {
         </h2>
         <div>
           <Row>
-            {userData.savedBooks.map((book) => {
+            {userData.savedBooks?.map((book) => {
               return (
-                <col md="4">
+                <Col md="4">
                   <Card key={book.bookId} border="dark">
                     {book.image ? (
                       <Card.Img
@@ -88,13 +94,13 @@ const SavedBooks = () => {
                       </Button>
                     </Card.Body>
                   </Card>
-                </col>
+                </Col>
               );
             })}
           </Row>
         </div>
       </Container>
-    </div>
+    </>
   );
 };
 

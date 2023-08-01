@@ -48,7 +48,7 @@ const SignupForm = () => {
       const { data } = await addUser({
         variables: { ...userFormData },
       });
-
+      console.log(data);
       Auth.login(data.addUser.token);
     } catch (err) {
       console.error(err);
@@ -75,7 +75,7 @@ const SignupForm = () => {
           Something went wrong with your signup!
         </Alert>
 
-        <Form.Group>
+        <Form.Group className="mb-3">
           <Form.Label htmlFor="username">Username</Form.Label>
           <Form.Control
             type="text"
@@ -90,7 +90,7 @@ const SignupForm = () => {
           </Form.Control.Feedback>
         </Form.Group>
 
-        <Form.Group>
+        <Form.Group className="mb-3">
           <Form.Label htmlFor="email">Email</Form.Label>
           <Form.Control
             type="email"
@@ -104,7 +104,8 @@ const SignupForm = () => {
             Email is required!
           </Form.Control.Feedback>
         </Form.Group>
-        <Form.Group>
+
+        <Form.Group className="mb-3">
           <Form.Label htmlFor="password">Password</Form.Label>
           <Form.Control
             type="password"

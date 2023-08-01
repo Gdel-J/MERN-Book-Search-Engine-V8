@@ -80,9 +80,6 @@ const SearchBooks = () => {
 
       // if book successfully saves to user's account, save book id to state
       setSavedBookIds([...savedBookIds, bookToSave.bookId]);
-
-      //save `savedBookIds` list to localStorage
-      saveBookIds(saveBookIds);
     } catch (err) {
       console.error(err);
     }
@@ -125,7 +122,8 @@ const SearchBooks = () => {
           {searchedBooks.map((book) => {
             return (
               <Col md="4">
-                <Card key={book.bookId} border="dark">
+                <Card key={book.bookId} border="dark"
+                  className='mb-3'>
                   {book.image ? (
                     <Card.Img
                       src={book.image}
