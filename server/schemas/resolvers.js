@@ -42,8 +42,6 @@ const resolvers = {
     
     },
 
-
-
     saveBook: async (parent, { bookData }, context) => {
       if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
