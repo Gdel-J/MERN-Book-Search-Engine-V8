@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 //Apollo Provider
-import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
 import SearchBooks from './pages/SearchBooks';
@@ -23,7 +23,7 @@ const authLink = setContext((_, {headers}) => {
   return { 
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : ``,
+      authorization: token ? `Bearer ${token}` : '',
     },
   };
 });
