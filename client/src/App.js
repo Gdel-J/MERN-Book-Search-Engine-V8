@@ -11,7 +11,7 @@ import Navbar from './components/Navbar';
 
 //Construct the main GraphQL API endpoint
 const httpLink = createHttpLink ({
-  uri: '/graphql',
+  uri: 'http://localhost:3001/graphql',
 });
 
 const authLink = setContext((_, {headers}) => {
